@@ -169,6 +169,7 @@ public class QuantityMeasurementController {
         )
     )
     public ResponseEntity<QuantityMeasurementDTO> performDivision(@Valid @RequestBody QuantityInputDTO input) {
+    	logger.info("Received request for division: " + input);
     	return ResponseEntity.ok(
     	        service.divide(input.getThisQuantityDTO(), input.getThatQuantityDTO())
     		    );
@@ -193,6 +194,7 @@ public class QuantityMeasurementController {
     public ResponseEntity<List<QuantityMeasurementDTO>> getOperationHistoryByType(
         @PathVariable String type
     ) {
+    	logger.info("Received request for operation history by type: " + type);
         return ResponseEntity.ok(service.getMeasurementsByType(type));
     }
 
@@ -204,12 +206,14 @@ public class QuantityMeasurementController {
     public ResponseEntity<Long> getOperationCount(
         @PathVariable String operation
     ) {
+    	logger.info("Received request for operation count: " + operation);
         return ResponseEntity.ok(service.getOperationCount(operation));
     }
 
     @GetMapping("/history/errored")
     @Operation(summary = "Get errored operations history")
     public ResponseEntity<List<QuantityMeasurementDTO>> getErroredOperations() {
+    	logger.info("Received request for errored operations history");
         return ResponseEntity.ok(service.getErrorHistory());
     }
 
